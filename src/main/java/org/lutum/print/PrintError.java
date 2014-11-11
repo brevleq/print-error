@@ -34,11 +34,11 @@ public class PrintError extends Application {
         printRequestAttributeSet.add(new JobName("test", Locale.getDefault()));
         DocFlavor flavor = DocFlavor.INPUT_STREAM.AUTOSENSE;
         Doc mydoc = new SimpleDoc(ClassLoader.class.getResourceAsStream("/should-be-printed.txt"), flavor, null);
-        DocPrintJob job = recuperarImpressora(printerJob.getPrinter().getName()).createPrintJob();
+        DocPrintJob job = getPrintService(printerJob.getPrinter().getName()).createPrintJob();
         job.print(mydoc, printRequestAttributeSet);
     }
 
-    private PrintService recuperarImpressora(String name) {
+    private PrintService getPrintService(String name) {
         for (PrintService printService : java.awt.print.PrinterJob.lookupPrintServices()) {
             if (name.equalsIgnoreCase(printService.getName())) {
                 return printService;
